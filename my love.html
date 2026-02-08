@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love</title>
+
+<style>
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:black;
+}
+
+video{
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.overlay{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    font-family: Arial, sans-serif;
+    pointer-events:none;
+}
+
+#count{
+    font-size:140px;
+    color:#fff3b0;
+    text-shadow:0 0 30px #fff;
+    display:none;
+}
+
+#love{
+    font-size:75px;
+    color:#ff9fcf;
+    text-shadow:0 0 30px hotpink;
+    display:none;
+}
+
+#final{
+    font-size:28px;
+    color:#ff69b4;
+    text-shadow:0 0 20px hotpink;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<video id="bg" muted playsinline>
+    <source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay">
+    <div id="count"></div>
+    <div id="love">You are my love</div>
+    <div id="final">i love Ngọc Châu</div>
+</div>
+
+<script>
+const video = document.getElementById("bg");
+const count = document.getElementById("count");
+const love = document.getElementById("love");
+const final = document.getElementById("final");
+
+/* FORCE PLAY – FIX iOS / ANDROID */
+window.addEventListener("click", () => {
+    video.play();
+}, { once:true });
+
+video.addEventListener("timeupdate",()=>{
+    const t = video.currentTime;
+
+    if(t<1){
+        count.style.display="block";
+        count.innerText="3";
+    }
+    else if(t<2){
+        count.innerText="2";
+    }
+    else if(t<3){
+        count.innerText="1";
+    }
+    else{
+        count.style.display="none";
+    }
+
+    if(t>=3 && t<6){
+        love.style.display="block";
+    }else{
+        love.style.display="none";
+    }
+
+    if(t>=6){
+        final.style.display="block";
+    }
+});
+</script>
+
+</body>
+</html>
